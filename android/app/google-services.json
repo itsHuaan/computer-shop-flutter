@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "597286125845",
+    "project_id": "login-demo-a5d32",
+    "storage_bucket": "login-demo-a5d32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597286125845:android:659fb44dd32af449a1291c",
+        "android_client_info": {
+          "package_name": "com.example.login_example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8HYA6ZrkpWOGmn27dlWbqqIIU604xC_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
