@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sign-in Demo',
-        theme: darkMode,
+        theme: lightMode,
         home: const AuthPage(),
       ),
     );

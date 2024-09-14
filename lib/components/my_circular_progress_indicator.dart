@@ -12,7 +12,7 @@ class MyCircularProgressIndicator extends StatelessWidget {
     return CircularProgressIndicator(
       strokeCap: StrokeCap.round,
       strokeWidth: strokeWidth,
-      color: Theme.of(context).colorScheme.inversePrimary,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 }

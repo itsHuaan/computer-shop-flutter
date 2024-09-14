@@ -24,13 +24,13 @@ class MyTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       cursorRadius: const Radius.circular(50),
-      cursorColor: Theme.of(context).colorScheme.inversePrimary,
+      cursorColor: Theme.of(context).colorScheme.onPrimary,
       decoration: InputDecoration(
         errorText: errorText,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
-          borderSide: const BorderSide(
-            color: Color.fromARGB(255, 207, 102, 120),
+          borderSide: BorderSide(
+            color: Theme.of(context).colorScheme.error,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
@@ -43,7 +43,7 @@ class MyTextField extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         labelText: labelText,
         labelStyle: TextStyle(
-          color: Theme.of(context).colorScheme.inversePrimary,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),

@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 child: MyButton(
                   text: 'Sign In',
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                  backgroundColor: Theme.of(context).colorScheme.onPrimary,
                   textColor: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(10.0),
                   style: const TextStyle(
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: MyLinkText(
                       text: 'Forgot password?',
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: MyIconButton(
-                        backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         padding: 10.0,
                         borderRadius: 15.0,
                         child: Brand(
@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
                       child: MyIconButton(
-                        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         padding: 10.0,
                         borderRadius: 15.0,
                         child: Brand(
