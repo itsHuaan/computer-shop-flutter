@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:login_example/components/my_button.dart';
+import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/components/my_icon_button.dart';
 import 'package:login_example/components/my_link_text.dart';
 import 'package:login_example/components/my_text_field.dart';
+import 'package:login_example/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,22 +21,42 @@ class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
   bool _isEmailEmpty = false;
   bool _isPasswordEmpty = false;
-
+  String? _emailErrorMessage;
+  String? _passwordErrorMessage;
   void signIn() async {
     showDialog(
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: MyCircularProgressIndicator(
+          strokeWidth: 5.0,
+        ),
       ),
     );
-    setState(() {
-      _isEmailEmpty = emailController.text.isEmpty;
-      _isPasswordEmpty = passwordController.text.isEmpty;
-    });
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
+    try {
+      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+        setState(() {
+          _isEmailEmpty = emailController.text.isEmpty;
+          _isPasswordEmpty = passwordController.text.isEmpty;
+          _emailErrorMessage = _isEmailEmpty ? 'Email is required' : null;
+          _passwordErrorMessage = _isPasswordEmpty ? 'Password is required' : null;
+        });
+      }
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        setState(() {
+          _emailErrorMessage = 'No user found for this email';
+        });
+      } else if (e.code == 'wrong-password') {
+        setState(() {
+          _passwordErrorMessage = 'Password is invalid';
+        });
+      }
+    }
+    Navigator.pop(context);
   }
 
   @override
@@ -51,9 +73,8 @@ class _LoginPageState extends State<LoginPage> {
                   top: 60.0,
                   bottom: 50.0,
                 ),
-                child: Image.asset(
-                  'assets/images/my_logo.png',
-                  height: 200,
+                child: const Placeholder(
+                  fallbackHeight: 200,
                 ),
               ),
               const Text(
@@ -63,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 child: MyTextField(
-                  errorText: _isEmailEmpty ? 'Email is required' : null,
+                  errorText: _isEmailEmpty ? _emailErrorMessage : null,
                   controller: emailController,
                   labelText: 'Email*',
                 ),
@@ -71,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 child: MyTextField(
-                  errorText: _isPasswordEmpty ? 'Password is required' : null,
+                  errorText: _isPasswordEmpty ? _passwordErrorMessage : null,
                   controller: passwordController,
                   labelText: 'Password*',
                   obscureText: _obscureText,
@@ -156,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                           Brands.google,
                           size: 60,
                         ),
-                        onPressed: () {},
+                        onPressed: () => AuthService().signInWithGoogle(),
                       ),
                     ),
                     Padding(

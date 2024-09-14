@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -15,11 +14,11 @@ class MyLinkText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: text,
+    return GestureDetector(
+      onTap: onTap,
+      child: Text(
+        text,
         style: style,
-        recognizer: TapGestureRecognizer()..onTap = onTap,
       ),
     );
   }
