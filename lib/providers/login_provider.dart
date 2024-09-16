@@ -1,21 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginProvider with ChangeNotifier {
+class LoginProvider extends ChangeNotifier {
   late TextEditingController emailController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
+  late TextEditingController passwordConfirmController = TextEditingController();
 
+  bool _isLoginPage = true;
   bool _obscureText = true;
-  bool _isEmailEmpty = false;
-  bool _isPasswordEmpty = false;
+  bool _hasEmailError = false;
+  bool _hasPasswordError = false;
   String? _emailErrorMessage;
   String? _passwordErrorMessage;
 
+  bool get isLoginPage => _isLoginPage;
   bool get obscureText => _obscureText;
-  bool get isEmailEmpty => _isEmailEmpty;
-  bool get isPasswordEmpty => _isPasswordEmpty;
+  bool get hasEmailError => _hasEmailError;
+  bool get hasPasswordError => _hasPasswordError;
   String? get emailErrorMessage => _emailErrorMessage;
   String? get passwordErrorMessage => _passwordErrorMessage;
+
+  void switchPage() {
+    _isLoginPage = !_isLoginPage;
+    notifyListeners();
+  }
 
   void toggleObscureText() {
     _obscureText = !_obscureText;
@@ -23,10 +31,22 @@ class LoginProvider with ChangeNotifier {
   }
 
   void validateInput() {
-    _isEmailEmpty = emailController.text.isEmpty;
-    _isPasswordEmpty = passwordController.text.isEmpty;
-    _emailErrorMessage = _isEmailEmpty ? 'Email is required' : null;
-    _passwordErrorMessage = _isPasswordEmpty ? 'Password is required' : null;
+    _hasEmailError = emailController.text.isEmpty;
+    _hasPasswordError = passwordController.text.isEmpty;
+    if (_hasEmailError && _hasPasswordError) {
+      _emailErrorMessage = 'Email is required';
+      _passwordErrorMessage = 'Password is required';
+    } else if (_hasEmailError) {
+      _emailErrorMessage = 'Email is required';
+      _passwordErrorMessage = null;
+    } else if (_hasPasswordError) {
+      _passwordErrorMessage = 'Password is required';
+      _emailErrorMessage = null;
+    } else {
+      _emailErrorMessage = null;
+      _passwordErrorMessage = null;
+    }
+
     notifyListeners();
   }
 
@@ -46,13 +66,14 @@ class LoginProvider with ChangeNotifier {
         );
       } else {
         validateInput();
+        return;
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        _emailErrorMessage = 'No user found for this email';
-      } else if (e.code == 'wrong-password') {
-        _passwordErrorMessage = 'Password is invalid';
+      if (e.code == 'invalid-credential') {
+        _hasEmailError = _hasPasswordError = true;
+        _emailErrorMessage = _passwordErrorMessage = "Please check your credentials";
       }
+
       notifyListeners();
     } finally {
       if (Navigator.canPop(context)) {

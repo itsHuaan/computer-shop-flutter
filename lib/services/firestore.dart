@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login_example/models/user_model.dart';
 
 class FirestoreService {
   final CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -10,5 +12,18 @@ class FirestoreService {
       return userData['isManager'] as bool;
     }
     return false;
+  }
+
+  Future<void> addUser(UserModel user) async {
+    try {
+      await users.add(
+        {
+          'email': user.email,
+          'isManager': user.isManager,
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+    }
   }
 }

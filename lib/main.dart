@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_example/firebase_options.dart';
 import 'package:login_example/pages/auth_page.dart';
 import 'package:login_example/providers/login_provider.dart';
+import 'package:login_example/providers/signup_provider.dart';
 import 'package:login_example/theme/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => SignupProvider()),
       ],
       child: const MyApp(),
     ),
@@ -32,7 +34,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sign-in Demo',
-        theme: darkMode,
+        theme: lightMode,
+        darkTheme: darkMode,
+        themeMode: ThemeMode.system,
         home: const AuthPage(),
       ),
     );

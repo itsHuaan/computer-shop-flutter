@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:login_example/components/my_button.dart';
-import 'package:login_example/components/my_text_field.dart';
-import 'package:login_example/components/my_link_text.dart';
 import 'package:login_example/components/my_icon_button.dart';
+import 'package:login_example/components/my_link_text.dart';
+import 'package:login_example/components/my_text_field.dart';
 import 'package:login_example/providers/login_provider.dart';
+import 'package:login_example/providers/signup_provider.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Center(
-          child: Consumer<LoginProvider>(
-            builder: (context, loginProvider, child) {
+          child: Consumer<SignupProvider>(
+            builder: (context, signUpProvider, child) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -31,36 +33,51 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    'Login',
+                    'Sign up',
                     style: TextStyle(fontSize: 50),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
-                      errorText: loginProvider.hasEmailError ? loginProvider.emailErrorMessage : null,
-                      controller: loginProvider.emailController,
+                      errorText: signUpProvider.isEmailEmpty ? signUpProvider.emailErrorMessage : null,
+                      controller: signUpProvider.emailController,
                       labelText: 'Email*',
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
-                      errorText: loginProvider.hasPasswordError ? loginProvider.passwordErrorMessage : null,
-                      controller: loginProvider.passwordController,
+                      errorText: signUpProvider.isPasswordEmpty ? signUpProvider.passwordErrorMessage : null,
+                      controller: signUpProvider.passwordController,
                       labelText: 'Password*',
-                      obscureText: loginProvider.obscureText,
+                      obscureText: signUpProvider.obscureText,
                       suffixIcon: IconButton(
                         onPressed: () {
-                          loginProvider.toggleObscureText();
+                          signUpProvider.toggleObscureText();
                         },
-                        icon: Icon(loginProvider.obscureText ? Icons.visibility_rounded : Icons.visibility_off_rounded),
+                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_rounded : Icons.visibility_off_rounded),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                    child: MyTextField(
+                      errorText: signUpProvider.isPasswordConfirmEmpty ? signUpProvider.passwordConfirmErrorMessage : null,
+                      controller: signUpProvider.passwordConfirmController,
+                      labelText: 'Re-enter password*',
+                      obscureText: signUpProvider.obscureText,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          signUpProvider.toggleObscureText();
+                        },
+                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_rounded : Icons.visibility_off_rounded),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyButton(
-                      text: 'Sign In',
+                      text: 'Sign up',
                       backgroundColor: Theme.of(context).colorScheme.onPrimary,
                       textColor: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(10.0),
@@ -68,23 +85,8 @@ class LoginPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
-                      onPressed: () => loginProvider.signIn(context),
+                      onPressed: () => signUpProvider.signUp(context),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: MyLinkText(
-                          text: 'Forgot password?',
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    ],
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 15.0),
@@ -150,14 +152,14 @@ class LoginPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('You don\'t have an account? '),
+                      const Text('Already have have an account? '),
                       MyLinkText(
-                        text: 'Register now',
+                        text: 'Login now',
                         style: const TextStyle(
                           color: Colors.blue,
                         ),
                         onTap: () {
-                          context.read<LoginProvider>().switchPage();
+                          loginProvider.switchPage();
                         },
                       ),
                     ],
