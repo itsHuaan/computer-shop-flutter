@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:login_example/firebase_options.dart';
+import 'package:login_example/pages/admin/account_management_page.dart';
 import 'package:login_example/pages/auth_page.dart';
 import 'package:login_example/providers/login_provider.dart';
 import 'package:login_example/providers/signup_provider.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         darkTheme: darkMode,
         themeMode: ThemeMode.system,
         home: const AuthPage(),
+        routes: {
+          '/account_management': (context) => AccountManagementPage(),
+        },
       ),
     );
   }

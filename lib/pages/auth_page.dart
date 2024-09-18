@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_example/pages/admin_page.dart';
+import 'package:login_example/pages/admin/dashboard_page.dart';
 import 'package:login_example/pages/home_page.dart';
 import 'package:login_example/pages/login_or_register_page.dart';
 import 'package:login_example/services/firestore.dart';
@@ -36,7 +36,7 @@ class AuthPage extends StatelessWidget {
               }
               bool isManager = roleSnapshot.data ?? false;
               if (isManager) {
-                return const AdminPage();
+                return const DashboardPage();
               } else {
                 return const HomePage();
               }

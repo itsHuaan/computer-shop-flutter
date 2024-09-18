@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
+  appBarTheme: AppBarTheme(
+    titleTextStyle: GoogleFonts.overpass(
+      textStyle: const TextStyle(
+        fontSize: 20,
+      ),
+    ),
+  ),
+  textTheme: GoogleFonts.latoTextTheme().copyWith(
+    bodySmall: GoogleFonts.overpass(),
+    bodyMedium: GoogleFonts.overpass(),
+    bodyLarge: GoogleFonts.overpass(),
+  ),
   useMaterial3: true,
   colorScheme: const ColorScheme.light(
     surface: Color.fromARGB(255, 245, 245, 245),
@@ -17,6 +30,18 @@ ThemeData lightMode = ThemeData(
 );
 
 ThemeData darkMode = ThemeData(
+  appBarTheme: AppBarTheme(
+    titleTextStyle: GoogleFonts.overpass(
+      textStyle: const TextStyle(
+        fontSize: 20,
+      ),
+    ),
+  ),
+  textTheme: GoogleFonts.latoTextTheme().copyWith(
+    bodySmall: GoogleFonts.overpass(),
+    bodyMedium: GoogleFonts.overpass(),
+    bodyLarge: GoogleFonts.overpass(),
+  ),
   useMaterial3: true,
   colorScheme: const ColorScheme.dark(
     surface: Color.fromARGB(255, 18, 18, 18),

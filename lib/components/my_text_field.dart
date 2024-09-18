@@ -25,7 +25,20 @@ class MyTextField extends StatelessWidget {
       obscureText: obscureText,
       cursorRadius: const Radius.circular(50),
       cursorColor: Theme.of(context).colorScheme.onPrimary,
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+        // floatingLabelBehavior: FloatingLabelBehavior.auto,
+        floatingLabelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onSurface,
+          fontSize: 20,
+        ),
+        labelText: labelText,
+        labelStyle: TextStyle(
+          color: Theme.of(context).colorScheme.onTertiary,
+        ),
         errorText: errorText,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),
@@ -38,12 +51,6 @@ class MyTextField extends StatelessWidget {
           borderSide: BorderSide(
             color: Theme.of(context).colorScheme.primary,
           ),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        labelText: labelText,
-        labelStyle: TextStyle(
-          color: Theme.of(context).colorScheme.onPrimary,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_example/components/my_confirm_dialog.dart';
 
 class LoginProvider extends ChangeNotifier {
   late TextEditingController emailController = TextEditingController();
@@ -80,5 +81,21 @@ class LoginProvider extends ChangeNotifier {
         Navigator.pop(context);
       }
     }
+  }
+
+  Future<void> logOut(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (context) => MyConfirmDialog(
+        title: 'Sign out',
+        content: 'Are you sure to sign out?',
+        onPressed: () {
+          FirebaseAuth.instance.signOut();
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          }
+        },
+      ),
+    );
   }
 }
