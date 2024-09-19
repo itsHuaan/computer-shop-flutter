@@ -20,6 +20,7 @@ class FirestoreService {
         {
           'email': user.email,
           'isManager': user.isManager,
+          'timestamp': Timestamp.now(),
         },
       );
     } on FirebaseAuthException catch (e) {

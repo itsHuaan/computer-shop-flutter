@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/pages/admin/dashboard_page.dart';
 import 'package:login_example/pages/home_page.dart';
 import 'package:login_example/pages/login_or_register_page.dart';
@@ -17,7 +18,10 @@ class AuthPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: MyCircularProgressIndicator(
+              strokeWidth: 5.0,
+            ));
           }
 
           if (!snapshot.hasData) {
@@ -29,7 +33,10 @@ class AuthPage extends StatelessWidget {
             future: firestoreService.isManager(user.email!),
             builder: (context, roleSnapshot) {
               if (roleSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: MyCircularProgressIndicator(
+                  strokeWidth: 5.0,
+                ));
               }
               if (roleSnapshot.hasError) {
                 return const Center(child: Text('Error loading role'));
