@@ -50,19 +50,6 @@ class DashboardPage extends StatelessWidget {
               );
             },
           ),
-          MyDrawerItem(
-            icon: Icons.account_tree_rounded,
-            text: 'Account management',
-            onTap: () {
-              if (Navigator.canPop(context)) {
-                Navigator.pop(context);
-              }
-              Navigator.pushNamed(
-                context,
-                '/account_management',
-              );
-            },
-          ),
           const Spacer(),
           MyDrawerItem(
             icon: Icons.logout_outlined,

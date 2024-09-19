@@ -26,4 +26,8 @@ class FirestoreService {
       print(e.code);
     }
   }
+
+  Stream<QuerySnapshot> getUsers() {
+    return users.orderBy('isManager', descending: true).snapshots();
+  }
 }

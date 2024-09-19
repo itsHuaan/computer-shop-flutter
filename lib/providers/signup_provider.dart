@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/models/user_model.dart';
 import 'package:login_example/services/firestore.dart';
 
@@ -67,7 +68,7 @@ class SignupProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: MyCircularProgressIndicator(strokeWidth: 5.0),
       ),
     );
 
@@ -79,7 +80,9 @@ class SignupProvider extends ChangeNotifier {
           email: emailController.text,
           password: passwordController.text,
         );
-        UserModel user = UserModel(emailController.text);
+        UserModel user = UserModel(
+          email: emailController.text,
+        );
         await firestoreService.addUser(user);
         clearFieldsAndErrors();
       }

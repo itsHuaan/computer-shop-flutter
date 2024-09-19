@@ -70,7 +70,7 @@ class RegisterPage extends StatelessWidget {
                         onPressed: () {
                           signUpProvider.toggleObscureText();
                         },
-                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_rounded : Icons.visibility_off_rounded),
+                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined),
                       ),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/components/my_confirm_dialog.dart';
 
 class LoginProvider extends ChangeNotifier {
@@ -55,7 +56,7 @@ class LoginProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) => const Center(
-        child: CircularProgressIndicator(),
+        child: MyCircularProgressIndicator(strokeWidth: 5.0),
       ),
     );
 
@@ -77,7 +78,7 @@ class LoginProvider extends ChangeNotifier {
 
       notifyListeners();
     } finally {
-      if (Navigator.canPop(context)) {
+      if (Navigator.canPop(context) || context.mounted) {
         Navigator.pop(context);
       }
     }
