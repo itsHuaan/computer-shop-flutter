@@ -39,6 +39,8 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      enabledBorderColor: Theme.of(context).colorScheme.tertiary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isEmailEmpty ? signUpProvider.emailErrorMessage : null,
                       controller: signUpProvider.emailController,
                       labelText: 'Email*',
@@ -47,6 +49,8 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      enabledBorderColor: Theme.of(context).colorScheme.tertiary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isPasswordEmpty ? signUpProvider.passwordErrorMessage : null,
                       controller: signUpProvider.passwordController,
                       labelText: 'Password*',
@@ -55,13 +59,15 @@ class RegisterPage extends StatelessWidget {
                         onPressed: () {
                           signUpProvider.toggleObscureText();
                         },
-                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_rounded : Icons.visibility_off_rounded),
+                        icon: Icon(signUpProvider.obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined),
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      enabledBorderColor: Theme.of(context).colorScheme.tertiary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isPasswordConfirmEmpty ? signUpProvider.passwordConfirmErrorMessage : null,
                       controller: signUpProvider.passwordConfirmController,
                       labelText: 'Re-enter password*',
@@ -125,7 +131,9 @@ class RegisterPage extends StatelessWidget {
                           child: MyIconButton(
                             backgroundColor: Theme.of(context).colorScheme.primary,
                             padding: 10.0,
-                            borderRadius: 15.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                             child: Brand(
                               Brands.google,
                               size: 60,
@@ -138,7 +146,9 @@ class RegisterPage extends StatelessWidget {
                           child: MyIconButton(
                             backgroundColor: Theme.of(context).colorScheme.primary,
                             padding: 10.0,
-                            borderRadius: 15.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                             child: Brand(
                               Brands.facebook_circled,
                               size: 60,

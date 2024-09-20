@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 class MyIconButton extends StatelessWidget {
   Widget child;
   double padding;
-  double borderRadius;
   Function()? onPressed;
+  OutlinedBorder? shape;
   Color? backgroundColor;
   MyIconButton({
     super.key,
     required this.child,
     this.padding = 5.0,
-    this.borderRadius = 5.0,
     this.backgroundColor,
     this.onPressed,
+    this.shape,
   });
 
   @override
@@ -22,9 +22,7 @@ class MyIconButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.all(padding),
         backgroundColor: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
+        shape: shape,
       ),
       onPressed: onPressed,
       child: child,

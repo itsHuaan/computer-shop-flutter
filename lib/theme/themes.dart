@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
+  hintColor: const Color.fromARGB(128, 0, 0, 0),
   appBarTheme: AppBarTheme(
     titleTextStyle: GoogleFonts.overpass(
       textStyle: const TextStyle(
@@ -30,6 +31,7 @@ ThemeData lightMode = ThemeData(
 );
 
 ThemeData darkMode = ThemeData(
+  hintColor: const Color.fromARGB(128, 255, 255, 255),
   appBarTheme: AppBarTheme(
     titleTextStyle: GoogleFonts.overpass(
       textStyle: const TextStyle(

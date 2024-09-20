@@ -21,14 +21,14 @@ class AccountManagementPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(title: 'Account Management'),
+      appBar: MyAppBar(title: 'Account Management'),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
@@ -65,7 +65,11 @@ class AccountManagementPage extends StatelessWidget {
                               'Admin',
                             ),
                           ),
-                          if (index < admins.length - 1) const Divider(),
+                          if (index < admins.length - 1)
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Divider(),
+                            ),
                         ],
                       );
                     },
@@ -74,8 +78,13 @@ class AccountManagementPage extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.all(15.0),
+              margin: const EdgeInsets.fromLTRB(
+                15.0,
+                0,
+                15.0,
+                15.0,
+              ),
+              padding: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
@@ -118,7 +127,10 @@ class AccountManagementPage extends StatelessWidget {
                               'Customer',
                             ),
                           ),
-                          const Divider(),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Divider(),
+                          ),
                         ],
                       );
                     },

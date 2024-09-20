@@ -1,51 +1,58 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_example/components/my_app_bar.dart';
-import 'package:login_example/components/my_drawer.dart';
-import 'package:login_example/components/my_drawer_item.dart';
-import 'package:login_example/providers/login_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:login_example/components/my_bottom_bar.dart';
+import 'package:login_example/pages/fav_items_page.dart';
+import 'package:login_example/pages/message_page.dart';
+import 'package:login_example/pages/profile_page.dart';
+import 'package:login_example/pages/shop_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  void navigateBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List<Widget> _pages = [
+    const ShopPage(),
+    const FavItemsPage(),
+    const MessagePage(),
+    const ProfilePage(),
+  ];
+  @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
-      appBar: const MyAppBar(
-        title: 'Home Page',
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Do your thing as ${user.email}'),
-          ],
-        ),
-      ),
-      drawer: MyDrawer(
-        children: [
-          Container(
-            padding: const EdgeInsets.only(
-              top: 50,
-              bottom: 50.0,
-            ),
-            child: const Icon(
-              Icons.shopping_bag_rounded,
-              size: 150,
-            ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: MyBottomBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        tabBackgroundColor: Theme.of(context).colorScheme.tertiary,
+        tabs: const [
+          GButton(
+            icon: Icons.shopping_bag_outlined,
+            text: 'Shop',
           ),
-          const Spacer(),
-          MyDrawerItem(
-            icon: Icons.logout_outlined,
-            text: 'Logout',
-            onTap: () {
-              loginProvider.logOut(context);
-            },
+          GButton(
+            icon: Icons.favorite_outline_outlined,
+            text: 'Favorite',
+          ),
+          GButton(
+            icon: Icons.message_outlined,
+            text: 'Messages',
+          ),
+          GButton(
+            icon: Icons.person_outlined,
+            text: 'Favorite',
           ),
         ],
+        onTabChange: (index) => navigateBottomBar(index),
       ),
     );
   }

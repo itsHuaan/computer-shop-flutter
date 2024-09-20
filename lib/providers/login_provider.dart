@@ -78,7 +78,7 @@ class LoginProvider extends ChangeNotifier {
 
       notifyListeners();
     } finally {
-      if (Navigator.canPop(context) || context.mounted) {
+      if (Navigator.canPop(context)) {
         Navigator.pop(context);
       }
     }

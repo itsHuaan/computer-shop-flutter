@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
-  const MyAppBar({
+  bool centerTitle;
+  MyAppBar({
     super.key,
     required this.title,
     this.actions,
+    this.centerTitle = true,
   });
 
   @override
@@ -16,7 +19,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: actions,
-      centerTitle: true,
+      centerTitle: centerTitle,
       title: Text(
         title,
         style: TextStyle(

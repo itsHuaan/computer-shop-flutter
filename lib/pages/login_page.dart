@@ -37,6 +37,8 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      enabledBorderColor: Theme.of(context).colorScheme.tertiary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: loginProvider.hasEmailError ? loginProvider.emailErrorMessage : null,
                       controller: loginProvider.emailController,
                       labelText: 'Email*',
@@ -45,6 +47,8 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      enabledBorderColor: Theme.of(context).colorScheme.tertiary,
+                      focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: loginProvider.hasPasswordError ? loginProvider.passwordErrorMessage : null,
                       controller: loginProvider.passwordController,
                       labelText: 'Password*',
@@ -123,7 +127,9 @@ class LoginPage extends StatelessWidget {
                           child: MyIconButton(
                             backgroundColor: Theme.of(context).colorScheme.primary,
                             padding: 10.0,
-                            borderRadius: 15.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                             child: Brand(
                               Brands.google,
                               size: 60,
@@ -136,7 +142,9 @@ class LoginPage extends StatelessWidget {
                           child: MyIconButton(
                             backgroundColor: Theme.of(context).colorScheme.primary,
                             padding: 10.0,
-                            borderRadius: 15.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                             child: Brand(
                               Brands.facebook_circled,
                               size: 60,

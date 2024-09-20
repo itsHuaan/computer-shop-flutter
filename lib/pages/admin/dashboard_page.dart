@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
     final loginProvider = Provider.of<LoginProvider>(context);
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
-      appBar: const MyAppBar(
+      appBar: MyAppBar(
         title: 'Dashboard',
       ),
       body: Center(
