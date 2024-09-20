@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       body: _pages[_selectedIndex],
       bottomNavigationBar: MyBottomBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        tabBackgroundColor: Theme.of(context).colorScheme.tertiary,
+        tabBackgroundColor: const Color.fromARGB(128, 0, 128, 255),
         tabs: const [
           GButton(
             icon: Icons.shopping_bag_outlined,

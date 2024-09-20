@@ -5,14 +5,16 @@ class MyCircleIconButton extends StatelessWidget {
   void Function()? onPressed;
   EdgeInsetsGeometry? margin;
   EdgeInsetsGeometry? padding;
-  Color? color;
+  Color? backgroundColor;
+  double? size;
   MyCircleIconButton({
     super.key,
     required this.icon,
     this.onPressed,
     this.margin,
     this.padding,
-    this.color,
+    this.backgroundColor,
+    this.size,
   });
 
   @override
@@ -21,7 +23,7 @@ class MyCircleIconButton extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: color,
+        color: backgroundColor,
         shape: BoxShape.circle,
       ),
       child: IconButton(
@@ -29,6 +31,7 @@ class MyCircleIconButton extends StatelessWidget {
         icon: Icon(
           icon,
           color: Theme.of(context).colorScheme.onPrimary,
+          size: size,
         ),
       ),
     );
