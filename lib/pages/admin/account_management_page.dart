@@ -8,26 +8,26 @@ import 'package:login_example/models/user_model.dart';
 class AccountManagementPage extends StatelessWidget {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  Stream<List<UserModel>> getAdmin() {
-    return firebaseFirestore.collection('users').where('isManager', isEqualTo: true).snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
-  }
+  Stream<List<UserModel>> getAdmin() => firebaseFirestore.collection('users').where('isManager', isEqualTo: true).snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
 
-  Stream<List<UserModel>> getUsers() {
-    return firebaseFirestore.collection('users').where('isManager', isEqualTo: false).snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
-  }
+  Stream<List<UserModel>> getUsers() => firebaseFirestore.collection('users').where('isManager', isEqualTo: false).snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromSnapshot(doc)).toList());
 
   AccountManagementPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(title: 'Account Management'),
+      appBar: MyAppBar(title: 'Accounts'),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(25.0, 15.0, 25.0, 0.0),
+              child: Text('Admin accounts'),
+            ),
             Container(
-              margin: const EdgeInsets.all(15.0),
+              margin: const EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 15.0),
               padding: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
@@ -77,13 +77,12 @@ class AccountManagementPage extends StatelessWidget {
                 },
               ),
             ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              child: Text('User accounts'),
+            ),
             Container(
-              margin: const EdgeInsets.fromLTRB(
-                15.0,
-                0,
-                15.0,
-                15.0,
-              ),
+              margin: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 15.0),
               padding: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,

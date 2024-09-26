@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class MyCircularProgressIndicator extends StatelessWidget {
   final double strokeWidth;
+  final double? value;
   const MyCircularProgressIndicator({
     super.key,
     required this.strokeWidth,
+    this.value,
   });
 
   @override
@@ -13,6 +15,7 @@ class MyCircularProgressIndicator extends StatelessWidget {
       strokeCap: StrokeCap.round,
       strokeWidth: strokeWidth,
       color: Theme.of(context).colorScheme.onSurface,
+      value: value,
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:login_example/components/my_app_bar.dart';
+import 'package:login_example/components/my_button.dart';
 import 'package:login_example/components/my_drawer.dart';
 import 'package:login_example/components/my_drawer_item.dart';
 import 'package:login_example/providers/login_provider.dart';
@@ -22,6 +24,11 @@ class DashboardPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('Admin: ${user.email}'),
+            MyButton(
+                text: 'Test',
+                onPressed: () {
+                  print('uploaded_images/${DateFormat('EEE_MMMddyyyy_HHmmss').format(DateTime.now())}.png');
+                })
           ],
         ),
       ),
@@ -47,6 +54,19 @@ class DashboardPage extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 '/account_management',
+              );
+            },
+          ),
+          MyDrawerItem(
+            icon: Icons.category_rounded,
+            text: 'Category management',
+            onTap: () {
+              if (Navigator.canPop(context)) {
+                Navigator.pop(context);
+              }
+              Navigator.pushNamed(
+                context,
+                '/category_management',
               );
             },
           ),

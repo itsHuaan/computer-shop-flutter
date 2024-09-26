@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MyButton extends StatelessWidget {
-  final Color backgroundColor;
+  Color? backgroundColor;
   BorderRadiusGeometry borderRadius;
   String text;
-  Color textColor;
-  TextStyle? style;
+  TextStyle? textStyle;
   Function()? onPressed;
   MyButton({
     super.key,
-    required this.backgroundColor,
+    this.backgroundColor,
     this.borderRadius = BorderRadius.zero,
     required this.text,
-    required this.textColor,
-    this.style,
+    this.textStyle,
     required this.onPressed,
   });
 
@@ -30,7 +28,7 @@ class MyButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Center(
-        child: Text(text, style: style),
+        child: Text(text, style: textStyle),
       ),
     );
   }

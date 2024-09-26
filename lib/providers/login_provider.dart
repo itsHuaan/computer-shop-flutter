@@ -78,8 +78,9 @@ class LoginProvider extends ChangeNotifier {
 
       notifyListeners();
     } finally {
-      if (Navigator.canPop(context)) {
-        Navigator.pop(context);
+      // Check if the widget is still mounted before calling Navigator.pop()
+      if (context.mounted) {
+        Navigator.pop(context); // Close the loading dialog
       }
     }
   }

@@ -66,9 +66,8 @@ class LoginPage extends StatelessWidget {
                     child: MyButton(
                       text: 'Sign In',
                       backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                      textColor: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.circular(10.0),
-                      style: const TextStyle(
+                      textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),

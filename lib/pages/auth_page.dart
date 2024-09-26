@@ -4,7 +4,7 @@ import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/pages/admin/dashboard_page.dart';
 import 'package:login_example/pages/home_page.dart';
 import 'package:login_example/pages/login_or_register_page.dart';
-import 'package:login_example/services/firestore.dart';
+import 'package:login_example/services/firestore_service.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
