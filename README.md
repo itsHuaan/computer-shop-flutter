@@ -1,6 +1,6 @@
-# computer shop
+# Computer shop with admin panel
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
