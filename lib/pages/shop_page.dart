@@ -4,13 +4,19 @@ import 'package:login_example/components/my_circle_icon_button.dart';
 import 'package:login_example/components/my_link_text.dart';
 import 'package:login_example/components/my_text_field.dart';
 import 'package:login_example/models/brands.dart';
-import 'package:login_example/models/categories.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> categories = [
+      'Mouse',
+      'Keyboard',
+      'Monitor',
+      'Laptop',
+      'Desktop',
+    ];
     return Column(
       children: [
         Padding(

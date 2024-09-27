@@ -39,6 +39,7 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      maxLines: 1,
                       enabledBorderColor: Theme.of(context).colorScheme.tertiary,
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isEmailEmpty ? signUpProvider.emailErrorMessage : null,
@@ -49,6 +50,7 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      maxLines: 1,
                       enabledBorderColor: Theme.of(context).colorScheme.tertiary,
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isPasswordEmpty ? signUpProvider.passwordErrorMessage : null,
@@ -66,6 +68,7 @@ class RegisterPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      maxLines: 1,
                       enabledBorderColor: Theme.of(context).colorScheme.tertiary,
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: signUpProvider.isPasswordConfirmEmpty ? signUpProvider.passwordConfirmErrorMessage : null,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_example/components/my_app_bar.dart';
 import 'package:login_example/components/my_circular_progress_indicator.dart';
 import 'package:login_example/components/my_drawer_item.dart';
-import 'package:login_example/models/user_model.dart';
+import 'package:login_example/models/user.dart';
 
 class AccountManagementPage extends StatelessWidget {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;

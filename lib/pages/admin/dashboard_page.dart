@@ -1,11 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:login_example/components/my_app_bar.dart';
 import 'package:login_example/components/my_button.dart';
 import 'package:login_example/components/my_drawer.dart';
 import 'package:login_example/components/my_drawer_item.dart';
 import 'package:login_example/providers/login_provider.dart';
+import 'package:login_example/theme/screen_size.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -14,7 +13,6 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<LoginProvider>(context);
-    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: MyAppBar(
         title: 'Dashboard',
@@ -23,12 +21,18 @@ class DashboardPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Admin: ${user.email}'),
-            MyButton(
+            SizedBox(
+              width: ScreenSize.widthPercent(context, 25),
+              child: MyButton(
+                borderRadius: BorderRadius.circular(15.0),
+                textStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+                backgroundColor: const Color.fromARGB(128, 0, 128, 255),
                 text: 'Test',
-                onPressed: () {
-                  print('uploaded_images/${DateFormat('EEE_MMMddyyyy_HHmmss').format(DateTime.now())}.png');
-                })
+                onPressed: () {},
+              ),
+            )
           ],
         ),
       ),

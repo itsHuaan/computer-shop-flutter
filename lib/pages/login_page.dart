@@ -37,6 +37,7 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      maxLines: 1,
                       enabledBorderColor: Theme.of(context).colorScheme.tertiary,
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: loginProvider.hasEmailError ? loginProvider.emailErrorMessage : null,
@@ -47,6 +48,7 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                     child: MyTextField(
+                      maxLines: 1,
                       enabledBorderColor: Theme.of(context).colorScheme.tertiary,
                       focusedBorderColor: Theme.of(context).colorScheme.primary,
                       errorText: loginProvider.hasPasswordError ? loginProvider.passwordErrorMessage : null,

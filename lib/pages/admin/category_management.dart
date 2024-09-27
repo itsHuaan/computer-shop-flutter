@@ -1,81 +1,120 @@
 import 'package:flutter/material.dart';
 import 'package:login_example/components/my_app_bar.dart';
+import 'package:login_example/components/my_button.dart';
 import 'package:login_example/components/my_circle_icon_button.dart';
-import 'package:login_example/components/my_circular_progress_indicator.dart';
-import 'package:login_example/services/storage_service.dart';
-import 'package:provider/provider.dart';
+import 'package:login_example/components/my_text_field.dart';
+import 'package:login_example/theme/screen_size.dart';
 
-class CategoryManagement extends StatefulWidget {
+class CategoryManagement extends StatelessWidget {
   const CategoryManagement({super.key});
 
   @override
-  State<CategoryManagement> createState() => _CategoryManagementState();
-}
-
-class _CategoryManagementState extends State<CategoryManagement> {
-  Future<void> fetchImages() async {
-    await Provider.of<StorageService>(context, listen: false).fetchImages();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchImages();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Consumer<StorageService>(
-      builder: (context, value, child) {
-        final List<String> imageUrls = value.imageUrls;
-        return Scaffold(
-          appBar: MyAppBar(title: 'Categories'),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => value.uploadImages(),
-            child: const Icon(Icons.upload_rounded),
-          ),
-          body: ListView.builder(
-            itemCount: imageUrls.length,
-            itemBuilder: (context, index) {
-              final String imageUrl = imageUrls[index];
-              return Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Stack(
-                  children: [
-                    Image.network(
-                      imageUrl,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress != null) {
-                          return Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(30.0),
-                              child: MyCircularProgressIndicator(
-                                strokeWidth: 5,
-                                value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes! : null,
+    return Scaffold(
+      appBar: MyAppBar(
+        title: 'Categories',
+        actions: [
+          IconButton(
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true, // Allow the modal to grow based on content
+                builder: (BuildContext context) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(15.0),
+                      ),
+                    ),
+                    child: IntrinsicHeight(
+                      child: Wrap(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Add new category',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                MyCircleIconButton(
+                                  icon: Icons.close_rounded,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 0.0),
+                            child: MyTextField(
+                              maxLines: 1,
+                              enabledBorderColor: Theme.of(context).colorScheme.secondary,
+                              focusedBorderColor: Theme.of(context).colorScheme.tertiary,
+                              labelText: 'Category name',
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 0.0),
+                            child: MyTextField(
+                              maxLines: 10,
+                              enabledBorderColor: Theme.of(context).colorScheme.secondary,
+                              focusedBorderColor: Theme.of(context).colorScheme.tertiary,
+                              labelText: 'Category Description',
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 0.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.all(20),
+                                backgroundColor: Theme.of(context).colorScheme.secondary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.upload_rounded,
+                                    color: Theme.of(context).colorScheme.onSecondary,
+                                  ),
+                                  Text(
+                                    'Upload a photo',
+                                    style: TextStyle(
+                                      color: Theme.of(context).colorScheme.onSecondary,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          );
-                        } else {
-                          return child;
-                        }
-                      },
-                    ),
-                    Positioned(
-                      top: 10.0,
-                      right: 10.0,
-                      child: MyCircleIconButton(
-                        icon: Icons.delete_rounded,
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        onPressed: () => value.deleteImages(imageUrl),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 0.0),
+                            child: MyButton(
+                              text: 'Save',
+                              backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                              borderRadius: BorderRadius.circular(10.0),
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  );
+                },
               );
             },
+            icon: const Icon(Icons.add_rounded),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }

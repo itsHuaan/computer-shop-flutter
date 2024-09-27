@@ -12,6 +12,7 @@ class MyTextField extends StatelessWidget {
   Widget? prefixIcon;
   Color enabledBorderColor;
   Color focusedBorderColor;
+  int? maxLines;
   MyTextField({
     super.key,
     this.obscureText = false,
@@ -22,6 +23,7 @@ class MyTextField extends StatelessWidget {
     this.controller,
     this.errorText,
     this.prefixIcon,
+    this.maxLines,
     required this.enabledBorderColor,
     required this.focusedBorderColor,
   });
@@ -29,6 +31,7 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: maxLines,
       controller: controller,
       obscureText: obscureText,
       cursorRadius: const Radius.circular(50),
